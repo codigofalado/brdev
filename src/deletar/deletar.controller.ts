@@ -1,4 +1,4 @@
-import { All, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { DeletarService } from './deletar.service';
 
 @Controller('deletar')
@@ -8,7 +8,6 @@ export class DeletarController {
     home(){
         return "Página Principal do Módulo DELETAR! 💣";
     }
-    @Put()
     @Get('teste')
     fernando(): string{
         return this.deletarService.getTest();
