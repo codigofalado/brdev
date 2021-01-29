@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { DeletarService } from './deletar.service';
 
-@Module({})
+@Module({
+  providers: [DeletarService]
+})
 export class DeletarModule {}
