@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import { TestParent } from '@prisma/client';
 import { DeletarService } from './deletar.service';
 
 @Controller('deletar')
@@ -21,4 +22,19 @@ export class DeletarController {
     qualquercoisa(){
         return "Qualquer Coisa! 🐗";
     }
+    @Get('test-parent')
+    async getTestParent(): Promise<TestParent[]>{
+        return this.deletarService.parents({});
+    }
+    @Get('test-parent/:id')
+    async getTestParentById(@Param('id') id: string): Promise<TestParent>{
+        const testParent = await this.deletarService.parent({
+            id: Number.parseInt(id)
+        });
+        if(!testParent){
+            throw new NotFoundException();
+        }
+        return testParent;
+    }
+    
 }
