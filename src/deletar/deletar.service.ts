@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {TestParent, TestChild, Prisma} from '@prisma/client';
-import { DbService } from 'src/db.service';
+import { DbService } from '../db.service';
 @Injectable()
 export class DeletarService {
     constructor(private configService: ConfigService, private db: DbService){}
