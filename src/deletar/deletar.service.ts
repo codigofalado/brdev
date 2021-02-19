@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {TestParent, TestChild, Prisma} from '@prisma/client';
 import { DbService } from '../db.service';
+import { Author } from './models/author.model';
 @Injectable()
 export class DeletarService {
     constructor(private configService: ConfigService, private db: DbService){}
@@ -28,5 +29,13 @@ export class DeletarService {
       where,
       orderBy,
     });
+  }
+  async findAuthorById(id: number){
+    // @TODO: Implement
+    return;
+  }
+  async findPostsByAuthor({authorId: Author}) {
+    // @TODO: Implement
+    return;    
   }
 }
