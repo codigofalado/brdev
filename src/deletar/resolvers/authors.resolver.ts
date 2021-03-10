@@ -13,6 +13,11 @@ export class AuthorsResolver {
     return this.deletarService.findAuthorById(id);
   }
 
+  @Query(returns => [Author], {description: 'Return all authors'})
+  async authors() {
+    return await this.deletarService.getAuthors();
+  }
+
   @ResolveField()
   async posts(@Parent() author: Author) {
     const { id } = author;

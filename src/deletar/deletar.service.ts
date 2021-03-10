@@ -32,10 +32,18 @@ export class DeletarService {
   }
   async findAuthorById(id: number){
     // @TODO: Implement
-    return;
+    return this.db.testParent.findUnique({
+      where: {
+        id: id
+      },
+    });
+  }
+  async getAuthors() {
+    // @TODO: Implement
+    return this.parents({});
   }
   async findPostsByAuthor({authorId: Author}) {
     // @TODO: Implement
-    return;    
+    return;
   }
 }

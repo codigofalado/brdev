@@ -1,0 +1,29 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: ID!
+  title: String!
+
+  """The Votes!"""
+  votes: Float
+}
+
+type Author {
+  id: Int!
+  name: String
+  email: String
+
+  """A Beautiful emoji"""
+  emoji: String
+  posts: [Post!]!
+}
+
+type Query {
+  """Return one author from the provided ID"""
+  author(id: Int!): Author!
+
+  """Return all authors"""
+  authors: [Author!]!
+}

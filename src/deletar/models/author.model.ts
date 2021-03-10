@@ -5,13 +5,11 @@ import { Post } from './post.model';
 export class Author {
   @Field(type => Int)
   id: number;
-
-  @Field({ nullable: true })
-  firstName?: string;
-
-  @Field({ nullable: true })
-  lastName?: string;
-
-  @Field(type => [Post])
+  name?: string;
+  email?: string;
+  /**
+   * A Beautiful emoji
+   */
+  emoji?: string = '🐒';
   posts: Post[];
 }
