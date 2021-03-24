@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { DeletarModule } from './deletar/deletar.module';
 import { DbService } from './db.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
@@ -15,7 +14,6 @@ import { join } from 'path';
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
-    DeletarModule
   ],
   controllers: [AppController],
   providers: [AppService, DbService],
