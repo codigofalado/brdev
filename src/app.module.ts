@@ -11,9 +11,10 @@ import { join } from 'path';
     ConfigModule.forRoot({
       isGlobal: true,
     }), 
-    GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    }),
+    // @TODO: Re-enable GraphQL
+    // GraphQLModule.forRoot({
+    //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    // }),
   ],
   controllers: [AppController],
   providers: [AppService, DbService],
