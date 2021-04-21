@@ -9,9 +9,11 @@ describe('AppController', () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forRoot({
-        envFilePath: '.test.env',
-      })],
+      imports: [
+        ConfigModule.forRoot({
+          envFilePath: '.test.env',
+        }),
+      ],
       controllers: [AppController],
       providers: [AppService, ConfigService],
     }).compile();
@@ -28,7 +30,7 @@ describe('AppController', () => {
       expect(appController.getBrDev()).toBe('Hello BR.DEV! ⌨️🐒');
     });
     it('should return "Homepage"', () => {
-      expect(appController.home()).toBe("Homepage!");
+      expect(appController.home()).toBe('Homepage!');
     });
     it('Should return environment variables', () => {
       const db_user = configService.get<string>('DATABASE_USER');

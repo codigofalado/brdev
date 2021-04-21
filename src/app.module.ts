@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    UsersModule, 
+    UsersModule,
     // @TODO: Re-enable GraphQL
     // GraphQLModule.forRoot({
     //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
