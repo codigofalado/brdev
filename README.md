@@ -10,9 +10,21 @@ Confira também a [lista de tecnologias](https://github.com/codigofalado/brdev/w
 
 ## Instalando o projeto
 
+1 - Instale as dependências:
+
 ```bash
 $ npm install
 ```
+
+2 - Renomeie o arquivo `.env-example` para `.env`
+3 - Crie um banco de dados e atualize o `DATABASE_URL` do `.env` com a URL de conexão ao banco de dados criado.
+4 - Para criar as tabelas, execute o migrations:
+
+```bash
+$ npx prisma migrate reset --preview-feature
+```
+
+Este comando irá criar todas as tabelas e adicionar os registros necessários no banco de dados.
 
 ## Rodando o projeto
 
