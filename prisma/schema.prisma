@@ -10,19 +10,27 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model TestParent {
-  id       Int         @id @default(autoincrement())
-  email    String      @unique
-  name     String?
-  emoji    String?     @default("🐵")
-  children TestChild[]
+model User {
+  id        String    @id @default(uuid())
+  username  String    @unique
+  email     String    @unique
+  name      String?
+  password  String
+  createdAt DateTime  @default(now())
+  lastLogin DateTime?
+  role      Role      @default(USER)
+  profile   Profile?
 }
 
-model TestChild {
-  id        Int         @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean?    @default(false)
-  parent    TestParent? @relation(fields: [parentId], references: [id])
-  parentId  Int?
+model Profile {
+  user   User    @relation(fields: [userId], references: [id])
+  userId String  @unique
+  avatar String?
+  about  String?
+}
+
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
 }
