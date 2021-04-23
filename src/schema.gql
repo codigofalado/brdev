@@ -2,28 +2,57 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Post {
-  id: ID!
-  title: String!
-
-  """The Votes!"""
-  votes: Float
+type Profile {
+  userId: String!
+  avatar: String
+  about: String
 }
 
-type Author {
-  id: Int!
+type User {
+  id: String!
+  username: String!
+  email: String!
   name: String
-  email: String
+  password: String!
+  createdAt: DateTime!
+  lastLogin: DateTime
 
-  """A Beautiful emoji"""
-  emoji: String
-  posts: [Post!]!
+  """User, Moderator or Admin"""
+  role: Role!
+
+  """User Profile"""
+  profile: Profile!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
 }
 
 type Query {
-  """Return one author from the provided ID"""
-  author(id: Int!): Author!
+  users: [User!]!
+  user(id: Int!): User!
+}
 
-  """Return all authors"""
-  authors: [Author!]!
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

@@ -41,6 +41,11 @@ $ npm run start:prod
 
 ## Testando a parada
 
+1 - Copie o arquivo `.env` para `.env.test`.
+2 - Edite as variáveis de ambiente do `.env.test` para que um banco de dados diferente seja usado.
+
+No arquivo `package.json` você verá que executamos um comando `pretest`, que roda o migration + seed do banco de dados antes dos testes. Também temos um `posttest`, que limpa o banco de dados de testes após a execução.
+
 ```bash
 # unit tests
 $ npm run test

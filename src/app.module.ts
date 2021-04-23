@@ -7,16 +7,17 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { UsersModule } from './users/users.module';
 
+const ENV = process.env.NODE_ENV;
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: !ENV ? '.env' : `.env.${ENV}`,
+    }),
+    GraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     UsersModule,
-    // @TODO: Re-enable GraphQL
-    // GraphQLModule.forRoot({
-    //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    // }),
   ],
   controllers: [AppController],
   providers: [AppService, DbService],
