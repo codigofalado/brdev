@@ -1,26 +1,80 @@
 import { Injectable } from '@nestjs/common';
+import { User, Prisma, Profile } from '@prisma/client';
+import { DbService } from '../db.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UsersService {
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+  constructor(private db: DbService) {}
+
+  async create(data: CreateUserInput): Promise<User> {
+    return this.db.user.create({
+      data,
+    });
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll(
+    params: {
+      skip?: number;
+      take?: number;
+      cursor?: Prisma.UserWhereUniqueInput;
+      where?: Prisma.UserWhereInput;
+      orderBy?: Prisma.UserOrderByInput;
+    } = {},
+  ): Promise<User[]> {
+    const { skip, take, cursor, where, orderBy } = params;
+    return this.db.user.findMany({
+      skip,
+      take,
+      cursor,
+      where,
+      orderBy,
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    return this.db.user.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        profile: true,
+      },
+    });
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async findOneByEmail(email: string) {
+    return this.db.user.findUnique({
+      where: {
+        email,
+      },
+      include: {
+        profile: true,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async update(id: string, updateUserInput: UpdateUserInput): Promise<User> {
+    return this.db.user.update({
+      where: {
+        id,
+      },
+      data: updateUserInput,
+    });
+  }
+
+  async remove(id: string): Promise<[Profile, User]> {
+    const deleteProfile = this.db.profile.delete({
+      where: {
+        userId: id,
+      },
+    });
+    const deleteUser = this.db.user.delete({
+      where: {
+        id,
+      },
+    });
+    return this.db.$transaction([deleteProfile, deleteUser]);
   }
 }

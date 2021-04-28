@@ -12,9 +12,9 @@ import { Profile } from './profile.entity';
 // to the shema.prisma file
 
 export enum Role {
-  USER,
-  MODERATOR,
-  ADMIN,
+  USER = 'USER',
+  MODERATOR = 'MODERATOR',
+  ADMIN = 'ADMIN',
 }
 
 registerEnumType(Role, {
