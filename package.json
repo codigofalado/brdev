@@ -15,12 +15,12 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "pretest": "npx dotenv-cli -e .env.test -- npx prisma migrate reset --force --skip-generate --preview-feature",
-    "test": "jest",
+    "test": "npx dotenv-cli -e .env.test -- jest --maxWorkers=50%",
     "posttest": "npx dotenv-cli -e .env.test -- npx prisma migrate reset --force --skip-generate --skip-seed --preview-feature",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:watch": "npx dotenv-cli -e .env.test -- jest --watch",
+    "test:cov": "npx dotenv-cli -e .env.test -- jest --coverage",
+    "test:debug": "npx dotenv-cli -e .env.test -- node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "npx dotenv-cli -e .env.test -- jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
