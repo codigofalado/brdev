@@ -19,6 +19,40 @@ async function main() {
       },
     },
   });
+  const moderator = await prisma.user.upsert({
+    where: { email: 'moderator@br.dev' },
+    update: {},
+    create: {
+      username: 'moderator',
+      email: 'moderator@br.dev',
+      password: 'test', // Change that to some critpto stuff
+      name: 'Moderator Test',
+      role: 'MODERATOR',
+      profile: {
+        create: {
+          about: 'Olá! Eu sou o Moderador de Teste',
+          avatar: 'this_is_a_mod_test.jpg',
+        },
+      },
+    },
+  });
+  const user = await prisma.user.upsert({
+    where: { email: 'user@br.dev' },
+    update: {},
+    create: {
+      username: 'user',
+      email: 'user@br.dev',
+      password: 'test', // Change that to some critpto stuff
+      name: 'User Test',
+      role: 'USER',
+      profile: {
+        create: {
+          about: 'Olá! Eu sou o Usuário de Teste',
+          avatar: 'this_is_a_user_test.jpg',
+        },
+      },
+    },
+  });
 }
 main()
   .catch(e => {
