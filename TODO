@@ -9,5 +9,6 @@ Rotina para Nova Tabela / Modelo:
   ☐ Gerar o Migration
   ☐ Criar o Resource tipo Graphql Code First (`nest generate resource MODULO`)
   ☐ Mapear a Entidade (`modulo/entities/tabela.entity.ts`) com o `shema.prisma`
+  ☐ Criar os testes que cobrem a execução das funções do serviço.
   ☐ Criar/Alterar as funções do serviço do módulo para integrar ao Prisma.
 

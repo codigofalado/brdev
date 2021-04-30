@@ -14,13 +14,21 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'users' })
-  findAll() {
-    return this.usersService.findAll();
+  async findAll() {
+    return await this.usersService.findAll();
   }
 
-  @Query(() => User, { name: 'user' })
-  findOne(@Args('id') id: string) {
-    return this.usersService.findOne(id);
+  @Query(() => User, { name: 'user', nullable: true })
+  async findOne(
+    @Args('id', { nullable: true, defaultValue: null }) id?: string,
+    @Args('email', { nullable: true, defaultValue: null }) email?: string,
+  ) {
+    if (id === null) {
+      const user = await this.usersService.findOneByEmail(email);
+      return user;
+    }
+    const user = await this.usersService.findOne(id);
+    return user;
   }
 
   @Mutation(() => User)
